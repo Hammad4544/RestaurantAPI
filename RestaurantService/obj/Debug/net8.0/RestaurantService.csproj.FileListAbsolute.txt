@@ -1,0 +1,17 @@
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\bin\Debug\net8.0\RestaurantService.deps.json
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\bin\Debug\net8.0\RestaurantService.dll
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\bin\Debug\net8.0\RestaurantService.pdb
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\bin\Debug\net8.0\DataAcess.dll
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\bin\Debug\net8.0\Models.dll
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\bin\Debug\net8.0\DataAcess.pdb
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\bin\Debug\net8.0\Models.pdb
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\RestaurantService.csproj.AssemblyReference.cache
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\RestaurantService.GeneratedMSBuildEditorConfig.editorconfig
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\RestaurantService.AssemblyInfoInputs.cache
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\RestaurantService.AssemblyInfo.cs
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\RestaurantService.csproj.CoreCompileInputs.cache
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\Restaura.EEB68D51.Up2Date
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\RestaurantService.dll
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\refint\RestaurantService.dll
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\RestaurantService.pdb
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\ref\RestaurantService.dll
