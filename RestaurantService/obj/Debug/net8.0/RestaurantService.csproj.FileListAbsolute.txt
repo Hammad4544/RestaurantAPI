@@ -15,3 +15,4 @@ D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\RestaurantServ
 D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\refint\RestaurantService.dll
 D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\RestaurantService.pdb
 D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\ref\RestaurantService.dll
+D:\Hammad\App_VS\RestaurantAPI\RestaurantService\obj\Debug\net8.0\RestaurantService.sourcelink.json

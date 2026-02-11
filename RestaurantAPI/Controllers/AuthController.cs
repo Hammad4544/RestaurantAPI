@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models.DTOS.User;
 using RestaurantService.Interfaces;
 
 namespace RestaurantAPI.Controllers
@@ -14,6 +16,14 @@ namespace RestaurantAPI.Controllers
         {
             _authService = authService;
         }
+        [Authorize(Roles ="Admin")]
+        [HttpPost("create-admin")]
+        public async Task<IActionResult> CreateAdmin([FromForm] CreateAdminDTO dTO) {
+            await _authService.CreateAdminAsync(dTO);
+            return Ok("Admin Created Successfully");
+
+        }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromForm] Models.DTOS.User.RegisterDto dto)
         {

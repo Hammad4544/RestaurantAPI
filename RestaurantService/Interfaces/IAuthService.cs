@@ -11,5 +11,6 @@ namespace RestaurantService.Interfaces
     {
         Task<string> RegisterAsync(RegisterDto dto);
         Task<string> LoginAsync(LoginDto dto);
+        Task CreateAdminAsync(CreateAdminDTO dto);
     }
 }

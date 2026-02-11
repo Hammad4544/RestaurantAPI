@@ -13,7 +13,8 @@ namespace DataAcess.Repositories.UnitOfWork
         private readonly RestaurantDbContext _dbcontext;
         public IBranchRepo Branches { get; private set; }
         public ICategoryRepo Categories { get; private set; }
-
+        public IMenuItemRepo MenuItems { get; private set; }
+        public IMenuItemImageRepo MenuItemImages { get; private set; }
 
 
         public UnitOfWork(RestaurantDbContext dbContext)
@@ -21,6 +22,8 @@ namespace DataAcess.Repositories.UnitOfWork
             _dbcontext = dbContext;
             Branches = new BranchRepo(_dbcontext);
             Categories = new CategoryRepo(_dbcontext);
+            MenuItems = new MenuItemRepo(_dbcontext);
+            MenuItemImages = new MenuItemImageRepo(_dbcontext);
         }
 
         

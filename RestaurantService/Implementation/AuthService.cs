@@ -87,6 +87,27 @@ namespace RestaurantService.Implementation
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        public async Task CreateAdminAsync(CreateAdminDTO dto)
+        {
+            var exists = await _userManager.FindByEmailAsync(dto.Email);
+            if (exists != null)
+                throw new Exception("Admin already exists");
+
+            var admin = new ApplicationUser
+            {
+                UserName = dto.Email,
+                Email = dto.Email,
+                PhoneNumber = dto.PhoneNumber,
+                FullName = dto.FullName
+            };
+
+            var result = await _userManager.CreateAsync(admin, dto.Password);
+            if (!result.Succeeded)
+                throw new Exception(result.Errors.First().Description);
+
+            await _userManager.AddToRoleAsync(admin, "Admin");
+        }
+
     }
 
 }

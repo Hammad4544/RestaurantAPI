@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTOS.Barnch;
 using RestaurantService.Interfaces;
@@ -17,6 +18,7 @@ namespace RestaurantAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllBranches()
         {
             var branches = await _branchService.GetAllBranchesAsync();
@@ -24,6 +26,7 @@ namespace RestaurantAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> CreateBranch([FromBody] AddBranchDTO branchDto)
         {
             if (!ModelState.IsValid)
@@ -38,7 +41,7 @@ namespace RestaurantAPI.Controllers
             return Ok(createdBranch);
         }
         [HttpGet("{id}")]
-
+        [AllowAnonymous]
         public async Task<IActionResult> GetBranchById(int id)
         {
             var branch = await _branchService.GetBranchByIdAsync(id);
@@ -49,6 +52,7 @@ namespace RestaurantAPI.Controllers
             return Ok(branch);
         }
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateBranch(int id, [FromBody] UpdateBranchDTO branchDto)
         {
             if (!ModelState.IsValid)
@@ -63,6 +67,7 @@ namespace RestaurantAPI.Controllers
             return Ok(updatedBranch);
         }
         [HttpDelete("{id}")]
+        [Authorize(Roles ="Admin")]
 
         public async Task<IActionResult> DeleteBranch(int id)
         {

@@ -11,7 +11,8 @@ namespace DataAcess.Repositories.UnitOfWork
     {
         IBranchRepo Branches { get; }
         ICategoryRepo Categories { get; }
-        //IMenuItemRepo MenuItemRepo { get; }
+        IMenuItemRepo MenuItems { get; }
+        IMenuItemImageRepo MenuItemImages { get; }
         //IOrderRepo OrderRepo { get; }
         //IOrderItemRepo OrderItemRepo { get; }
         Task<bool> SaveAsync();

@@ -9,7 +9,7 @@ namespace RestaurantService.Interfaces
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<ResponsCategoryDTO>> GetAllCategoriesByBranchIdAsync(int branchId);
+        //Task<IEnumerable<ResponsCategoryDTO>> GetAllCategoriesByBranchIdAsync(int branchId);
         Task<IEnumerable<ResponsCategoryDTO>> GetAllCategories();  
         Task<ResponsCategoryDTO> GetCategoryByIdAsync(int categoryId);
         Task<ResponsCategoryDTO> CreateCategoryAsync(AddCategoryDTO category);

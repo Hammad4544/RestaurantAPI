@@ -40,6 +40,7 @@ namespace RestaurantService.Implementation
             var closed = await _unitOfWork.Categories.GetByIdAsync(categoryId);
             if (closed == null) { return false; }
             closed.IsActive = false;
+            await _unitOfWork.SaveAsync();
             return true;
         }
 

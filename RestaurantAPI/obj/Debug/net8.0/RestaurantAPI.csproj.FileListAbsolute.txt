@@ -157,3 +157,5 @@ D:\Hammad\App_VS\RestaurantAPI\RestaurantAPI\obj\Debug\net8.0\refint\RestaurantA
 D:\Hammad\App_VS\RestaurantAPI\RestaurantAPI\obj\Debug\net8.0\RestaurantAPI.pdb
 D:\Hammad\App_VS\RestaurantAPI\RestaurantAPI\obj\Debug\net8.0\RestaurantAPI.genruntimeconfig.cache
 D:\Hammad\App_VS\RestaurantAPI\RestaurantAPI\obj\Debug\net8.0\ref\RestaurantAPI.dll
+D:\Hammad\App_VS\RestaurantAPI\RestaurantAPI\obj\Debug\net8.0\RestaurantAPI.sourcelink.json
+D:\Hammad\App_VS\RestaurantAPI\RestaurantAPI\bin\Debug\net8.0\RestaurantAPI.staticwebassets.runtime.json

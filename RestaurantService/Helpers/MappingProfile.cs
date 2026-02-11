@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Models.DTOS.Barnch;
 using Models.DTOS.Category;
+using Models.DTOS.MenuItem;
 using Models.Entities;
 
 namespace RestaurantService.Helpers
@@ -27,6 +28,20 @@ namespace RestaurantService.Helpers
              CreateMap<ResponsCategoryDTO, Category>();
              CreateMap<UpdateCategoryDTO, Category>();
              CreateMap<Category, UpdateCategoryDTO>();
+
+            // MENUITEMS
+
+            CreateMap<AddMenuItemDTO, MenuItem>()
+    .ForMember(dest => dest.Images, opt => opt.Ignore());
+
+            CreateMap<MenuItem, MenuItemResponsDTO>()
+                .ForMember(dest => dest.Images, opt => opt.MapFrom(src =>
+                    src.Images.Select(i => i.ImageUrl)));
+
+            CreateMap<MenuItemResponsDTO, MenuItem>()
+                .ForMember(dest => dest.Images, opt => opt.Ignore());
+
+
         }
     }
 }

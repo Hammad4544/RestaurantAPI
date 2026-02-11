@@ -62,7 +62,7 @@ namespace RestaurantAPI
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IBranchService, BranchService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
-            //builder.Services.AddScoped<IMenuItemService, MenuItemService>();
+            builder.Services.AddScoped<IMenuItemService, MenuItemService>();
             //builder.Services.AddScoped<IOrderService, OrderService>();
             //builder.Services.AddScoped<IPaymentService, PaymentService>();
 
