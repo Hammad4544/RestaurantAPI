@@ -16,7 +16,8 @@ namespace DataAcess.Repositories.UnitOfWork
         public IMenuItemRepo MenuItems { get; private set; }
         public IMenuItemImageRepo MenuItemImages { get; private set; }
 
-
+        public ICartRepo Carts{ get; private set; }
+        public ICartItemRepo CartItems { get; private set; }
         public UnitOfWork(RestaurantDbContext dbContext)
         {
             _dbcontext = dbContext;
@@ -24,6 +25,8 @@ namespace DataAcess.Repositories.UnitOfWork
             Categories = new CategoryRepo(_dbcontext);
             MenuItems = new MenuItemRepo(_dbcontext);
             MenuItemImages = new MenuItemImageRepo(_dbcontext);
+            Carts = new CartRepo(_dbcontext);
+            CartItems = new CartItemRepo(_dbcontext);
         }
 
         
