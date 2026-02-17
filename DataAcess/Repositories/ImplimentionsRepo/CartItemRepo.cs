@@ -1,4 +1,5 @@
 ﻿using DataAcess.Repositories.InterfacesRepo;
+using Microsoft.EntityFrameworkCore;
 using Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,16 @@ namespace DataAcess.Repositories.ImplimentionsRepo
         {
 
             _dbContext = dbContext;
+        }
+
+        public void DeleteRange(ICollection<CartItem> cartItems)
+        {
+            _dbContext.CartItems.RemoveRange(cartItems);
+        }
+
+        public async Task<CartItem> FindByUserId(int Itemid, string userId)
+        {
+          return await _dbContext.CartItems.FirstOrDefaultAsync(i => i.Id == Itemid && i.Cart.UserId == userId && i.Cart.IsActive);
         }
     }
 }

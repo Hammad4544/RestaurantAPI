@@ -9,7 +9,10 @@ namespace RestaurantService.Interfaces
 {
     public interface ICartService
     {
-        Task<bool> AddToCartAsync(string userId, AddTOCartDto dto);
+         Task<CartResponseDTO?>  AddToCartAsync(string userId, AddTOCartDto dto);
         Task<CartResponseDTO> GetCartAsync(string userId);
+        Task<CartResponseDTO?> RemoveCartItem(string userId, int cartItemId);
+        Task<CartResponseDTO?> ClearCartAsync(string userId);
+        Task<CartResponseDTO?> UpdateCartItemQuantityAsync(string userId,int cartItemId,int newQuantity);
     }
 }

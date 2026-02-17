@@ -9,5 +9,7 @@ namespace DataAcess.Repositories.InterfacesRepo
 {
     public interface ICartItemRepo : IGenericRepo<CartItem>
     {
+        void DeleteRange(ICollection<CartItem> cartItems);
+        Task<CartItem> FindByUserId(int Itemid,string userId);
     }
 }

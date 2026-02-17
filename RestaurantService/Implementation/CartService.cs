@@ -19,40 +19,38 @@ namespace RestaurantService.Implementation
         
             _unitOfwork = unitOfWork;
         }
-        public async Task<bool> AddToCartAsync(string userId, AddTOCartDto dto)
+        public async Task<CartResponseDTO?> AddToCartAsync(string userId, AddTOCartDto dto)
         {
-            // 1️⃣ تأكد إن المنتج موجود
+            if (dto.Quantity <= 0)
+                return null;
+
             var menuItem = await _unitOfwork.MenuItems
                 .GetByIdAsync(dto.MenuItemId);
-           
-            if (menuItem == null || !menuItem.IsAvailable)
-                return false;
 
-            // 2️⃣ هات الكارت
+            if (menuItem == null || !menuItem.IsAvailable)
+                return null;
+
             var cart = await _unitOfwork.Carts
                 .GetActiveCartByUserIdWithItems(userId);
 
-            // 3️⃣ لو مفيش كارت اعمله واحد
             if (cart == null)
             {
                 cart = new Cart
                 {
                     UserId = userId,
-                    BranchId=menuItem.BranchId,
-                    IsActive=true,
+                    BranchId = menuItem.BranchId,
+                    IsActive = true,
                     CreatedAt = DateTime.UtcNow,
                 };
 
                 await _unitOfwork.Carts.AddAsync(cart);
                 await _unitOfwork.SaveAsync();
             }
-            else
+            else if (cart.BranchId != menuItem.BranchId)
             {
-                if(cart.BranchId!=menuItem.BranchId)
-                    return false; // يعني منتجين مش من نفس الفرع 
+                return null;
             }
 
-            //   المنتج موجود ولا لأ
             var existingItem = cart.CartItems
                 .FirstOrDefault(ci => ci.MenuItemId == dto.MenuItemId);
 
@@ -78,7 +76,17 @@ namespace RestaurantService.Implementation
 
             await _unitOfwork.SaveAsync();
 
-            return true;
+            return await GetCartAsync(userId);
+        }
+
+
+        public async Task<CartResponseDTO?> ClearCartAsync(string userId)
+        {
+            var cart = await _unitOfwork.Carts.GetActiveCartByUserIdWithItems(userId);
+            if (cart == null) return null;
+            _unitOfwork.CartItems.DeleteRange(cart.CartItems);
+            await _unitOfwork.SaveAsync();
+            return await GetCartAsync(userId);
         }
 
         public async Task<CartResponseDTO> GetCartAsync(string userId)
@@ -133,6 +141,54 @@ namespace RestaurantService.Implementation
             };
 
             return cartDto;
+        }
+
+        public async Task<CartResponseDTO?> RemoveCartItem(string userId, int cartItemId)
+        {
+            var cartItem = await _unitOfwork.CartItems.FindByUserId(cartItemId, userId);
+
+            if (cartItem == null)
+            {
+                return null;
+            }
+
+            _unitOfwork.CartItems.Delete(cartItem);
+
+   
+            var result = await _unitOfwork.SaveAsync();
+
+
+            return await GetCartAsync(userId);
+
+        }
+        public async Task<CartResponseDTO?> UpdateCartItemQuantityAsync(
+    string userId,
+    int cartItemId,
+    int newQuantity)
+        {
+            if (newQuantity < 0)
+                return null;
+
+            var cartItem = await _unitOfwork.CartItems
+                .FindByUserId(cartItemId, userId);
+
+            if (cartItem == null)
+                return null;
+
+            if (newQuantity == 0)
+            {
+                _unitOfwork.CartItems.Delete(cartItem);
+            }
+            else
+            {
+                cartItem.Quantity = newQuantity;
+                cartItem.TotalPrice =
+                    cartItem.UnitPrice * newQuantity;
+            }
+
+            await _unitOfwork.SaveAsync();
+
+            return await GetCartAsync(userId);
         }
 
     }
