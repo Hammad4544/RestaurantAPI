@@ -1,4 +1,5 @@
 ﻿using Models.DTOS.Cart;
+using RestaurantService.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace RestaurantService.Interfaces
         Task<CartResponseDTO?> RemoveCartItem(string userId, int cartItemId);
         Task<CartResponseDTO?> ClearCartAsync(string userId);
         Task<CartResponseDTO?> UpdateCartItemQuantityAsync(string userId,int cartItemId,int newQuantity);
+        Task<ServiceResult<string>> CheckOut(string userId);
     }
 }

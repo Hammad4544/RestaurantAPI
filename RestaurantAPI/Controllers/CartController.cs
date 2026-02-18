@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models.DTOS.Cart;
 using RestaurantService.Implementation;
 using RestaurantService.Interfaces;
+using System.Security.Claims;
 
 namespace RestaurantAPI.Controllers
 {
@@ -19,12 +20,10 @@ namespace RestaurantAPI.Controllers
             _cartService = cartService;
         }
 
-        
-        private string GetUserId()
+
+        private string? GetUserId()
         {
-            return User.FindFirst("sub")?.Value
-                   ?? User.FindFirst("id")?.Value
-                   ?? User.Identity!.Name!;
+            return User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }
 
         [HttpGet]
@@ -92,6 +91,19 @@ namespace RestaurantAPI.Controllers
 
             return Ok(result);
         }
+        [HttpPost("checkout")]
+        public async Task<IActionResult> Checkout()
+        {
+            var userId = GetUserId();
+
+            var result = await _cartService.CheckOut(userId);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Data);
+        }
+ 
     }
-    }
+}
 

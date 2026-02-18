@@ -79,6 +79,53 @@ namespace RestaurantService.Implementation
             return await GetCartAsync(userId);
         }
 
+        public async Task<ServiceResult<string>> CheckOut(string userId)
+        {
+            var cart = await _unitOfwork.Carts.GetActiveCartByUserIdWithItems(userId);
+
+            // 1. Validations
+            if (cart == null) return ServiceResult<string>.Failure("No active cart found.");
+            if (!cart.CartItems.Any()) return ServiceResult<string>.Failure("Cart is empty.");
+
+            // 2. Calculation 
+            decimal totalAmount = cart.CartItems.Sum(item => item.TotalPrice);
+
+            // 3. Mapping Order
+            var order = new Order
+            {
+                UserId = userId,
+                BranchId = cart.BranchId,
+                TotalPrice = totalAmount,
+                Status = Models.Enums.OrderStatus.Pending,
+                CreatedAt = DateTime.UtcNow,
+                OrderItems = cart.CartItems.Select(ci => new OrderItem
+                {
+                    MenuItemId = ci.MenuItemId,
+                    Quantity = ci.Quantity,
+                    Price = ci.UnitPrice
+                }).ToList()
+            };
+
+            try
+            {
+                // 4. Database Operations
+                await _unitOfwork.Orders.AddAsync(order);
+
+                // مسح العناصر وإغلاق الكارت
+                _unitOfwork.CartItems.DeleteRange(cart.CartItems);
+                cart.IsActive = false;
+
+                // تنفيذ الكل في Transaction واحدة بفضل الـ Unit of Work
+                await _unitOfwork.SaveAsync();
+
+                return ServiceResult<string>.Ok($"Order #{order.Id} placed successfully!");
+            }
+            catch (Exception ex)
+            {
+                // لو حصل أي خطأ في الداتا بيز
+                return ServiceResult<string>.Failure("An error occurred while processing your order.");
+            }
+        }
 
         public async Task<CartResponseDTO?> ClearCartAsync(string userId)
         {
@@ -89,26 +136,15 @@ namespace RestaurantService.Implementation
             return await GetCartAsync(userId);
         }
 
+        private const decimal VAT_RATE = 0.14m; // 14% ضريبة
+        private const decimal FIXED_DELIVERY_FEE = 30.0m;
+
         public async Task<CartResponseDTO> GetCartAsync(string userId)
         {
-            // 1️⃣ جلب الكارت
-            var cart = await _unitOfwork.Carts
-                .GetActiveCartByUserIdWithDetails(userId);
+            var cart = await _unitOfwork.Carts.GetActiveCartByUserIdWithDetails(userId);
 
-            // 2️⃣ لو مفيش كارت نشوف نرجع DTO فاضي
-            if (cart == null)
-            {
-                return new CartResponseDTO
-                {
-                    Items = new List<CartItemResponseDTO>(),
-                    SubTotal = 0,
-                    Tax = 0,
-                    DeliveryFee = 0,
-                    TotalAmount = 0
-                };
-            }
+            if (cart == null) return new CartResponseDTO { Items = new List<CartItemResponseDTO>() };
 
-            // 3️⃣ تحويل كل عنصر في CartItem ل DTO
             var items = cart.CartItems.Select(item => new CartItemResponseDTO
             {
                 CartItemId = item.Id,
@@ -120,14 +156,13 @@ namespace RestaurantService.Implementation
                 ItemTotal = item.Quantity * item.UnitPrice
             }).ToList();
 
-            // 4️⃣ الحسابات
             var subTotal = items.Sum(i => i.ItemTotal);
-            var tax = subTotal * 0.14m;          // مثال 14% ضريبة
-            var deliveryFee = 30m;               // مثال رسوم توصيل ثابتة
-            var totalAmount = subTotal + tax + deliveryFee;
 
-            // 5️⃣ إعداد DTO النهائي
-            var cartDto = new CartResponseDTO
+            // الحسابات بقت أنضف هنا
+            var tax = subTotal * VAT_RATE;
+            var totalAmount = subTotal + tax + FIXED_DELIVERY_FEE;
+
+            return new CartResponseDTO
             {
                 CartId = cart.Id,
                 BranchId = cart.BranchId,
@@ -136,13 +171,10 @@ namespace RestaurantService.Implementation
                 Items = items,
                 SubTotal = subTotal,
                 Tax = tax,
-                DeliveryFee = deliveryFee,
+                DeliveryFee = FIXED_DELIVERY_FEE,
                 TotalAmount = totalAmount
             };
-
-            return cartDto;
         }
-
         public async Task<CartResponseDTO?> RemoveCartItem(string userId, int cartItemId)
         {
             var cartItem = await _unitOfwork.CartItems.FindByUserId(cartItemId, userId);

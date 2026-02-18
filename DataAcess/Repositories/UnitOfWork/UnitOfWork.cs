@@ -15,6 +15,7 @@ namespace DataAcess.Repositories.UnitOfWork
         public ICategoryRepo Categories { get; private set; }
         public IMenuItemRepo MenuItems { get; private set; }
         public IMenuItemImageRepo MenuItemImages { get; private set; }
+        public IOrderRepo Orders { get; private set; }
 
         public ICartRepo Carts{ get; private set; }
         public ICartItemRepo CartItems { get; private set; }
@@ -27,6 +28,7 @@ namespace DataAcess.Repositories.UnitOfWork
             MenuItemImages = new MenuItemImageRepo(_dbcontext);
             Carts = new CartRepo(_dbcontext);
             CartItems = new CartItemRepo(_dbcontext);
+            Orders = new OrderRepo(_dbcontext);
         }
 
         

@@ -7,12 +7,24 @@
       "RelativeMoniker": "D:0:0:{93ACD03A-BF0F-4F2E-AD6A-487398D63CE1}|RestaurantAPI\\RestaurantAPI.csproj|solutionrelative:restaurantapi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C9085E8F-3B24-4FBD-9EE3-615D2F87871B}|RestaurantService\\RestaurantService.csproj|d:\\hammad\\app_vs\\restaurantapi\\restaurantservice\\interfaces\\icartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9085E8F-3B24-4FBD-9EE3-615D2F87871B}|RestaurantService\\RestaurantService.csproj|solutionrelative:restaurantservice\\interfaces\\icartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C9085E8F-3B24-4FBD-9EE3-615D2F87871B}|RestaurantService\\RestaurantService.csproj|d:\\hammad\\app_vs\\restaurantapi\\restaurantservice\\implementation\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C9085E8F-3B24-4FBD-9EE3-615D2F87871B}|RestaurantService\\RestaurantService.csproj|solutionrelative:restaurantservice\\implementation\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9085E8F-3B24-4FBD-9EE3-615D2F87871B}|RestaurantService\\RestaurantService.csproj|d:\\hammad\\app_vs\\restaurantapi\\restaurantservice\\implementation\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9085E8F-3B24-4FBD-9EE3-615D2F87871B}|RestaurantService\\RestaurantService.csproj|solutionrelative:restaurantservice\\implementation\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93ACD03A-BF0F-4F2E-AD6A-487398D63CE1}|RestaurantAPI\\RestaurantAPI.csproj|d:\\hammad\\app_vs\\restaurantapi\\restaurantapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93ACD03A-BF0F-4F2E-AD6A-487398D63CE1}|RestaurantAPI\\RestaurantAPI.csproj|solutionrelative:restaurantapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9085E8F-3B24-4FBD-9EE3-615D2F87871B}|RestaurantService\\RestaurantService.csproj|d:\\hammad\\app_vs\\restaurantapi\\restaurantservice\\interfaces\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9085E8F-3B24-4FBD-9EE3-615D2F87871B}|RestaurantService\\RestaurantService.csproj|solutionrelative:restaurantservice\\interfaces\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9085E8F-3B24-4FBD-9EE3-615D2F87871B}|RestaurantService\\RestaurantService.csproj|d:\\hammad\\app_vs\\restaurantapi\\restaurantservice\\interfaces\\icartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9085E8F-3B24-4FBD-9EE3-615D2F87871B}|RestaurantService\\RestaurantService.csproj|solutionrelative:restaurantservice\\interfaces\\icartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,35 +48,74 @@
               "RelativeDocumentMoniker": "RestaurantAPI\\Controllers\\CartController.cs",
               "ToolTip": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantAPI\\Controllers\\CartController.cs",
               "RelativeToolTip": "RestaurantAPI\\Controllers\\CartController.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAIwFgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T00:49:56.24Z",
+              "WhenOpened": "2026-02-17T22:49:30.988Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ICartService.cs",
-              "DocumentMoniker": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantService\\Interfaces\\ICartService.cs",
-              "RelativeDocumentMoniker": "RestaurantService\\Interfaces\\ICartService.cs",
-              "ToolTip": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantService\\Interfaces\\ICartService.cs",
-              "RelativeToolTip": "RestaurantService\\Interfaces\\ICartService.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAuwBEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-12T02:52:13.505Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "CartService.cs",
               "DocumentMoniker": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantService\\Implementation\\CartService.cs",
               "RelativeDocumentMoniker": "RestaurantService\\Implementation\\CartService.cs",
               "ToolTip": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantService\\Implementation\\CartService.cs",
               "RelativeToolTip": "RestaurantService\\Implementation\\CartService.cs",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAowKYAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAgwFEAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-12T02:40:48.179Z",
+              "WhenOpened": "2026-02-17T22:44:00.987Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantAPI\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "RestaurantAPI\\Controllers\\OrderController.cs",
+              "ToolTip": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantAPI\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "RestaurantAPI\\Controllers\\OrderController.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAwwBgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T22:17:33.461Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ICartService.cs",
+              "DocumentMoniker": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantService\\Interfaces\\ICartService.cs",
+              "RelativeDocumentMoniker": "RestaurantService\\Interfaces\\ICartService.cs",
+              "ToolTip": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantService\\Interfaces\\ICartService.cs",
+              "RelativeToolTip": "RestaurantService\\Interfaces\\ICartService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T22:16:44.653Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderService.cs",
+              "DocumentMoniker": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantService\\Implementation\\OrderService.cs",
+              "RelativeDocumentMoniker": "RestaurantService\\Implementation\\OrderService.cs",
+              "ToolTip": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantService\\Implementation\\OrderService.cs",
+              "RelativeToolTip": "RestaurantService\\Implementation\\OrderService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAwwBcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T22:11:59.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IOrderService.cs",
+              "DocumentMoniker": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantService\\Interfaces\\IOrderService.cs",
+              "RelativeDocumentMoniker": "RestaurantService\\Interfaces\\IOrderService.cs",
+              "ToolTip": "D:\\Hammad\\App_VS\\RestaurantAPI\\RestaurantService\\Interfaces\\IOrderService.cs",
+              "RelativeToolTip": "RestaurantService\\Interfaces\\IOrderService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T22:09:36.461Z",
               "EditorCaption": ""
             }
           ]
