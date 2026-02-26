@@ -66,6 +66,17 @@ namespace RestaurantAPI.Controllers
             }
             return Ok(updatedBranch);
         }
+        [HttpPatch("OpenBranch/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> OpenBranch(int id)
+        {
+            var updatedBranch = await _branchService.OpenBranchAsync(id);
+            if (!updatedBranch)
+            {
+                return NotFound();
+            }
+            return Ok(updatedBranch);
+        }
         [HttpDelete("{id}")]
         [Authorize(Roles ="Admin")]
 

@@ -15,5 +15,6 @@ namespace RestaurantService.Interfaces
         Task<AddBranchDTO> CreateBranchAsync(AddBranchDTO branch);
         Task<UpdateBranchDTO> UpdateBranchAsync(int id,UpdateBranchDTO branch);
         Task<bool> DeleteBranchAsync(int id);
+        Task<bool> OpenBranchAsync(int id);
     }
 }

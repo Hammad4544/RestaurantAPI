@@ -17,9 +17,10 @@ namespace RestaurantService.Implementation
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _iunitOfWork;
 
-        public BranchService(IUnitOfWork unitOfWork ,IMapper mapper) {
-        
-            _mapper=mapper;
+        public BranchService(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+
+            _mapper = mapper;
             _iunitOfWork = unitOfWork;
         }
         public async Task<AddBranchDTO> CreateBranchAsync(AddBranchDTO branch)
@@ -30,8 +31,8 @@ namespace RestaurantService.Implementation
                 Address = branch.Address,
                 Phone = branch.Phone
             };
-           await _iunitOfWork.Branches.AddAsync(b);
-           var t =  await _iunitOfWork.SaveAsync();
+            await _iunitOfWork.Branches.AddAsync(b);
+            var t = await _iunitOfWork.SaveAsync();
             if (t) { return branch; }
             return null;
 
@@ -48,9 +49,9 @@ namespace RestaurantService.Implementation
         public async Task<IEnumerable<ResponsAllBranchesDTO>> GetAllBranchesAsync()
         {
             var branches = await _iunitOfWork.Branches.GetAllAsync();
-            
-            
-            return _mapper.Map<IEnumerable<ResponsAllBranchesDTO>>(branches) ;
+
+
+            return _mapper.Map<IEnumerable<ResponsAllBranchesDTO>>(branches);
 
 
         }
@@ -58,13 +59,13 @@ namespace RestaurantService.Implementation
         public async Task<ResponsAllBranchesDTO> GetBranchByIdAsync(int id)
         {
             if (id <= 0) { return null; }
-            
+
             var b = await _iunitOfWork.Branches.GetByIdAsync(id);
             if (b == null) { return null; }
             return _mapper.Map<ResponsAllBranchesDTO>(b);
         }
 
-        public async Task<UpdateBranchDTO> UpdateBranchAsync(int id,UpdateBranchDTO branch)
+        public async Task<UpdateBranchDTO> UpdateBranchAsync(int id, UpdateBranchDTO branch)
         {
             if (branch == null) { return null; }
             var existingBranch = await _iunitOfWork.Branches.GetByIdAsync(id);
@@ -72,8 +73,17 @@ namespace RestaurantService.Implementation
             existingBranch.Name = branch.Name;
             existingBranch.Address = branch.Address;
             existingBranch.Phone = branch.Phone;
-           await _iunitOfWork.Branches.SaveAsync();
+            existingBranch.IsOpen = branch.IsOpen;
+            await _iunitOfWork.Branches.SaveAsync();
             return branch;
+        }
+        public async Task<bool> OpenBranchAsync(int id)
+        {
+            var existingBranch = await _iunitOfWork.Branches.GetByIdAsync(id);
+            if (existingBranch == null) { return false; }
+            existingBranch.IsOpen = true;
+            await _iunitOfWork.Branches.SaveAsync();
+            return true;
         }
     }
 }

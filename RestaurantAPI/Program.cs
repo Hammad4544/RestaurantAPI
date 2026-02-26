@@ -22,6 +22,19 @@ namespace RestaurantAPI
             JsonWebTokenHandler.DefaultInboundClaimTypeMap.Clear();
             var builder = WebApplication.CreateBuilder(args);
 
+            // ≈÷«›… Œœ„… «·‹ CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("MyAngularPolicy",
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:4200") // »Ê—  «·√‰ÃÌÊ·«— » «⁄ﬂ
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
+                    });
+            });
+
+
             //dependency injection for services and repositories
             builder.Services.AddDbContext<RestaurantDbContext>(options =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -96,8 +109,8 @@ namespace RestaurantAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
-
+            app.UseStaticFiles();
+            app.UseCors("MyAngularPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
             

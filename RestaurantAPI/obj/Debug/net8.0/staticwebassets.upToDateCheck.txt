@@ -1,2 +1,3 @@
 wwwroot\images\menuItems\1\6de6507c-e61d-4b5f-b2b8-59e499e81ca3.png
 wwwroot\images\menuItems\2\212bdf16-407b-41f5-a146-5100c5d3e64d.png
+wwwroot\images\menuItems\3\2d056a0b-736e-4a5f-b7ed-55bd6f62cd4a.jpg

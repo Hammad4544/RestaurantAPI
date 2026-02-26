@@ -162,6 +162,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "RestaurantAPI.Controllers.BranchController",
+    "Method": "OpenBranch",
+    "RelativePath": "api/Branch/OpenBranch/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RestaurantAPI.Controllers.CartController",
     "Method": "GetCart",
     "RelativePath": "api/Cart",
