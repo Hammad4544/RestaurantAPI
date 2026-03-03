@@ -1,4 +1,5 @@
-﻿using Models.Entities;
+﻿using Models.DTOS.Order;
+using Models.Entities;
 using Models.Enums;
 using RestaurantService.Implementation;
 using System;
@@ -12,8 +13,8 @@ namespace RestaurantService.Interfaces
     public interface IOrderService
     {
         //Task PlaceOrderAsync(Order order);
-        //Task<Order> GetOrderByIdAsync(Guid orderId);
-        //Task<IEnumerable<Order>> GetOrdersByCustomerIdAsync(Guid customerId);
+         Task<OrderResponseDto> GetOrderByIdAsync(int orderId);
+        Task<IEnumerable<OrderResponseDto>> GetOrdersByCustomerIdAsync(string customerId);
         Task<ServiceResult<string>> UpdateOrderStatusAsync(int orderId, OrderStatus newStatus);
     }
 }
