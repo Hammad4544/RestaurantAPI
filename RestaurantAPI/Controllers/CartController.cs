@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.DTOS.Cart;
+using Models.Enums;
 using RestaurantService.Implementation;
 using RestaurantService.Interfaces;
 using System.Security.Claims;
@@ -92,11 +93,11 @@ namespace RestaurantAPI.Controllers
             return Ok(result);
         }
         [HttpPost("checkout")]
-        public async Task<IActionResult> Checkout()
+        public async Task<IActionResult> Checkout([FromQuery] PaymentMethod method)
         {
             var userId = GetUserId();
 
-            var result = await _cartService.CheckOut(userId);
+            var result = await _cartService.CheckOut(userId,method);
 
             if (!result.Success)
                 return BadRequest(result.Message);

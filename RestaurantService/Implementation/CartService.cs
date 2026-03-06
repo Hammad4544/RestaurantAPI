@@ -2,6 +2,7 @@
 using Models.DTOS.Cart;
 using Models.DTOS.CartItem;
 using Models.Entities;
+using Models.Enums;
 using RestaurantService.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -79,7 +80,7 @@ namespace RestaurantService.Implementation
             return await GetCartAsync(userId);
         }
 
-        public async Task<ServiceResult<string>> CheckOut(string userId)
+        public async Task<ServiceResult<string>> CheckOut(string userId, PaymentMethod method)
         {
             var cart = await _unitOfwork.Carts.GetActiveCartByUserIdWithItems(userId);
 
@@ -106,10 +107,20 @@ namespace RestaurantService.Implementation
                 }).ToList()
             };
 
+            var payment = new Payment
+            {
+                Order = order,
+                Method = method,
+                PaidAt = null,
+                Status = PaymentStatus.Pending 
+                 
+            };
+
             try
             {
                 // 4. Database Operations
                 await _unitOfwork.Orders.AddAsync(order);
+                await _unitOfwork.payments.AddAsync(payment);
 
                 // مسح العناصر وإغلاق الكارت
                 _unitOfwork.CartItems.DeleteRange(cart.CartItems);

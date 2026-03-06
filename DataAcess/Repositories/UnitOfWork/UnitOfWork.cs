@@ -19,6 +19,7 @@ namespace DataAcess.Repositories.UnitOfWork
 
         public ICartRepo Carts{ get; private set; }
         public ICartItemRepo CartItems { get; private set; }
+        public IPaymentRepo payments { get; private set; }
         public UnitOfWork(RestaurantDbContext dbContext)
         {
             _dbcontext = dbContext;
@@ -29,6 +30,7 @@ namespace DataAcess.Repositories.UnitOfWork
             Carts = new CartRepo(_dbcontext);
             CartItems = new CartItemRepo(_dbcontext);
             Orders = new OrderRepo(_dbcontext);
+            payments = new PaymentRepo(_dbcontext);
         }
 
         

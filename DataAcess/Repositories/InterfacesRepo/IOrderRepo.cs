@@ -11,5 +11,7 @@ namespace DataAcess.Repositories.InterfacesRepo
     {
         Task<Order?> GetOrderWithDetailsAsync(int orderId);
          Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId);
+
+        Task<IEnumerable<Order>> GetAllOrders();
     }
 }

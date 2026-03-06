@@ -9,7 +9,7 @@ namespace RestaurantAPI.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
@@ -44,6 +44,15 @@ namespace RestaurantAPI.Controllers
             if (customerId == null) return Unauthorized();
             var orders = await _orderService.GetOrdersByCustomerIdAsync(customerId);
             return Ok(orders);
+        }
+        [HttpGet("admin/all-orders")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAllOrders()
+        {
+            var orders = await _orderService.GetAllOrdersAsync();
+            return Ok(orders);
+
+
         }
     }
 }

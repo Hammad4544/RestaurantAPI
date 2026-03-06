@@ -78,9 +78,7 @@ namespace RestaurantService.Implementation
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(
-                    double.Parse(_config["Jwt:DurationInMinutes"]!)
-                ),
+                expires: DateTime.Now.AddYears(1),
                 signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
             );
 

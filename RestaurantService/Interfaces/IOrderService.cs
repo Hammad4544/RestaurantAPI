@@ -16,5 +16,6 @@ namespace RestaurantService.Interfaces
          Task<OrderResponseDto> GetOrderByIdAsync(int orderId);
         Task<IEnumerable<OrderResponseDto>> GetOrdersByCustomerIdAsync(string customerId);
         Task<ServiceResult<string>> UpdateOrderStatusAsync(int orderId, OrderStatus newStatus);
+            Task<IEnumerable<OrderResponseDto>> GetAllOrdersAsync();
     }
 }

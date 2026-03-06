@@ -1,6 +1,7 @@
 ﻿using DataAcess.Repositories.UnitOfWork;
 using Models.DTOS.Order;
 using Models.DTOS.OrderItem;
+using Models.Entities;
 using Models.Enums;
 using RestaurantService.Interfaces;
 using System;
@@ -18,6 +19,35 @@ namespace RestaurantService.Implementation
         public OrderService(IUnitOfWork unitOfWork) {
         
             _unitOfWork = unitOfWork;
+        }
+
+        public async Task<IEnumerable<OrderResponseDto>> GetAllOrdersAsync()
+        {
+            var orders = await _unitOfWork.Orders.GetAllOrders();
+            if (orders == null || !orders.Any()) return Enumerable.Empty<OrderResponseDto>();
+            return orders.Select(orders => new OrderResponseDto
+            {
+                user=orders.User.FullName ?? "Unknown User",
+                BranchId = orders.BranchId,
+                BranchName = orders.Branch.Name ?? "Unknown Branch",
+                TotalPrice = orders.TotalPrice,
+                OrderId = orders.Id,
+                CreatedAt = orders.CreatedAt,
+                Status = orders.Status.ToString(),
+                Items = orders.OrderItems.Select(oi => new OrderItemResponseDto
+                {
+                    MenuItemId = oi.MenuItemId,
+                    Quantity = oi.Quantity,
+                    UnitPrice = oi.Price,
+                    MenuItemName = oi.MenuItem.Name ?? "Unknown Item",
+                    ItemTotal = oi.Quantity * oi.Price,
+                    ImageUrl = oi.MenuItem.Images.FirstOrDefault()?.ImageUrl
+                }).ToList(),
+                PaymentMethod = orders.Payment.Method.ToString() ?? "Cach"
+
+            });
+            
+
         }
 
         public async Task<OrderResponseDto> GetOrderByIdAsync(int orderId)
@@ -48,14 +78,25 @@ namespace RestaurantService.Implementation
         {
             var orders = await _unitOfWork.Orders.GetOrdersByUserIdAsync(customerId);
             if (orders == null || !orders.Any()) return Enumerable.Empty<OrderResponseDto>();
-            return orders.Select(orders => new OrderResponseDto { 
-                BranchId= orders.BranchId,
+            return orders.Select(orders => new OrderResponseDto
+            {
+                BranchId = orders.BranchId,
                 BranchName = orders.Branch.Name,
-                TotalPrice =orders.TotalPrice,
-                OrderId=orders.Id,
+                TotalPrice = orders.TotalPrice,
+                OrderId = orders.Id,
                 CreatedAt = orders.CreatedAt,
                 Status = orders.Status.ToString(),
-                
+                Items = orders.OrderItems.Select(oi => new OrderItemResponseDto
+                {
+                    MenuItemId = oi.MenuItemId,
+                    Quantity = oi.Quantity,
+                    UnitPrice = oi.Price,
+                    MenuItemName = oi.MenuItem.Name,
+                    ItemTotal = oi.Quantity * oi.Price,
+                    ImageUrl = oi.MenuItem.Images.FirstOrDefault()?.ImageUrl
+                }).ToList(),
+                PaymentMethod = orders.Payment.Method.ToString() ?? "Cach"
+
             });
         }
 
@@ -64,6 +105,16 @@ namespace RestaurantService.Implementation
             var order = await _unitOfWork.Orders.GetByIdAsync(orderId);
             if (order == null) return ServiceResult<string>.Failure("Order not found");
             order.Status = newStatus;
+            if (newStatus == OrderStatus.Delivered)
+            {
+                 var payment = await _unitOfWork.payments.GetByOrderIdAsync(orderId);
+                if(payment!=null && payment.Status != PaymentStatus.Paid)
+                {
+                    payment.Status = PaymentStatus.Paid;
+                    payment.PaidAt = DateTime.UtcNow;
+
+                }
+            }
             await _unitOfWork.SaveAsync();
             return ServiceResult<string>.Ok("Order status updated successfully");
         }

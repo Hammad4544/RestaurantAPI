@@ -17,11 +17,25 @@ namespace DataAcess.Repositories.ImplimentionsRepo
             _context = context;
         }
 
+        public async Task<IEnumerable<Order>> GetAllOrders()
+        {
+            return await _context.Orders
+                .Include(b => b.Branch)
+                .Include(u => u.User)
+                .Include(it => it.OrderItems)
+                    .ThenInclude(oi => oi.MenuItem)
+                .Include(p => p.Payment)
+                .OrderByDescending(o => o.CreatedAt)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId)
         {
             return await _context.Orders.
                 Include(b=>b.Branch)
                 .Include(it=>it.OrderItems)
+                .ThenInclude(itm=> itm.MenuItem)
+                .Include(p=>p.Payment)
                 .Where(o => o.UserId == userId)
                 .OrderByDescending(o => o.CreatedAt)
                 .ToListAsync();

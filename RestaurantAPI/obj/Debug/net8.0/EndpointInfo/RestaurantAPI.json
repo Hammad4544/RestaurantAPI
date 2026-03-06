@@ -402,6 +402,15 @@
         "tags": [
           "Cart"
         ],
+        "parameters": [
+          {
+            "name": "method",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/PaymentMethod"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -902,6 +911,15 @@
           4,
           5,
           6
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "PaymentMethod": {
+        "enum": [
+          1,
+          2,
+          3
         ],
         "type": "integer",
         "format": "int32"

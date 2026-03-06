@@ -16,6 +16,7 @@ namespace DataAcess.Repositories.UnitOfWork
         ICartRepo Carts { get; }
         ICartItemRepo CartItems { get; }
         IOrderRepo Orders { get; }
+        IPaymentRepo payments { get; }
         //IOrderItemRepo OrderItemRepo { get; }
         Task<bool> SaveAsync();
     }

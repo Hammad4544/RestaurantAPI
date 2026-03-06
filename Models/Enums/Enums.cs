@@ -15,7 +15,6 @@ namespace Models.Enums
     public enum OrderStatus
     {
         Pending = 1,
-        Paid,
         Preparing,
         OnTheWay,
         Delivered,

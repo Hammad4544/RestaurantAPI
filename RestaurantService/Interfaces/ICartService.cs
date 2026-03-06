@@ -1,4 +1,5 @@
 ﻿using Models.DTOS.Cart;
+using Models.Enums;
 using RestaurantService.Implementation;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,6 @@ namespace RestaurantService.Interfaces
         Task<CartResponseDTO?> RemoveCartItem(string userId, int cartItemId);
         Task<CartResponseDTO?> ClearCartAsync(string userId);
         Task<CartResponseDTO?> UpdateCartItemQuantityAsync(string userId,int cartItemId,int newQuantity);
-        Task<ServiceResult<string>> CheckOut(string userId);
+        Task<ServiceResult<string>> CheckOut(string userId,PaymentMethod method);
     }
 }
