@@ -13,9 +13,10 @@ namespace RestaurantService.Interfaces
     public interface IOrderService
     {
         //Task PlaceOrderAsync(Order order);
-         Task<OrderResponseDto> GetOrderByIdAsync(int orderId);
+        Task<OrderResponseDto> GetOrderByIdAsync(int orderId);
         Task<IEnumerable<OrderResponseDto>> GetOrdersByCustomerIdAsync(string customerId);
         Task<ServiceResult<string>> UpdateOrderStatusAsync(int orderId, OrderStatus newStatus);
-            Task<IEnumerable<OrderResponseDto>> GetAllOrdersAsync();
+        Task<IEnumerable<OrderResponseDto>> GetAllOrdersAsync();
+        Task<ServiceResult<string>> CancelOrderAsync(int orderId,string userId);
     }
 }

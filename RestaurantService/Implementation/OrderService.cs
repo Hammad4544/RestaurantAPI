@@ -21,6 +21,27 @@ namespace RestaurantService.Implementation
             _unitOfWork = unitOfWork;
         }
 
+        public async Task<ServiceResult<string>> CancelOrderAsync(int orderId, string userId)
+        {
+            var order = await _unitOfWork.Orders.GetByIdAsync(orderId);
+            if (order == null)
+            {
+                return ServiceResult<string>.Failure("Order not found");
+            }
+            if (order.UserId != userId)
+            {
+                return ServiceResult<string>.Failure("You can only cancel your own orders");
+            }
+            if (order.Status == OrderStatus.Delivered || order.Status == OrderStatus.Cancelled || order.Status == OrderStatus.Preparing)
+            {
+                return ServiceResult<string>.Failure("Cannot cancel an order that is already Preparing or delivered or cancelled");
+            }
+            order.Status = OrderStatus.Cancelled;
+            await _unitOfWork.SaveAsync();
+            return ServiceResult<string>.Ok("Order cancelled successfully");
+
+        }
+
         public async Task<IEnumerable<OrderResponseDto>> GetAllOrdersAsync()
         {
             var orders = await _unitOfWork.Orders.GetAllOrders();

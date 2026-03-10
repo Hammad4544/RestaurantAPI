@@ -513,6 +513,16 @@
   },
   {
     "ContainingType": "RestaurantAPI.Controllers.OrderController",
+    "Method": "GetAllOrders",
+    "RelativePath": "api/Order/admin/all-orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RestaurantAPI.Controllers.OrderController",
     "Method": "GetOrdersByCustomerId",
     "RelativePath": "api/Order/my-orders",
     "HttpMethod": "GET",

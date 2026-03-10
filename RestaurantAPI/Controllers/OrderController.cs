@@ -54,5 +54,15 @@ namespace RestaurantAPI.Controllers
 
 
         }
+        [HttpPatch("CancelOrder/{orderId}")]
+        
+        public async Task<IActionResult> CancelOrder(int orderId)
+        {
+            var userid = GetUserId();
+            var result = await _orderService.CancelOrderAsync(orderId,userid);
+            if (result.Success)
+                return Ok(result.Message);
+            return BadRequest(result.Message);
+        }
     }
 }
